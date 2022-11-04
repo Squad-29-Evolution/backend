@@ -5,10 +5,15 @@
   "repository": "https://github.com/Squad-29-Evolution/backend",
   "license": "MIT",
   "scripts": {
+    "docker": "docker compose -f docker-compose.dev.yml up -d",
+    "dev": "nodemon",
+    "build": "tsc",
+    "init-dev": "yarn docker && npx prisma migrate dev --name init && yarn dev",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
   "dependencies": {
+    "@prisma/client": "^4.5.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
