@@ -8,7 +8,7 @@
     "docker": "docker compose -f docker-compose.dev.yml up -d",
     "dev": "nodemon",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/app.js",
     "init-dev": "yarn docker && npx prisma migrate dev --name init && yarn dev",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
