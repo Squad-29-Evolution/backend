@@ -24,7 +24,6 @@ class CreateUserService {
         name,
         email,
         password: passwordHash,
-        xp: 0,
       },
     });
 
