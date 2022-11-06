@@ -10,5 +10,6 @@ root.get("/", (req: Request, res: Response) => {
 });
 
 root.post("/users/create", userController.create);
+root.post("/users/login", userController.login);
 
 export default root;
