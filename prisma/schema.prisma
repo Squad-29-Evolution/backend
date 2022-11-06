@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,8 +7,87 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model Users {
+  id           String         @id @default(uuid())
+  name         String
+  email        String         @unique
+  password     String
+  role         Role           @default(USER)
+  xp           Int
+  created_at   DateTime       @default(now())
+  Dates        Dates[]
+  UserTrails   UserTrails[]
+  UserContents UserContents[]
+}
+
+model Trails {
+  id          String       @id @default(uuid())
+  name        String
+  hours       Int
+  description String
+  created_at  DateTime     @default(now())
+  Contents    Contents[]
+  UserTrails  UserTrails[]
+}
+
+model Contents {
+  id                  String        @id @default(uuid())
+  title               String
+  description         String
+  link                String
+  type                String
+  duration            DateTime      @db.Time(0)
+  created_at          DateTime      @default(now())
+  trail               Trails        @relation(fields: [trail_id], references: [id])
+  trail_id            String
+  category            Category      @relation(fields: [category_id], references: [id])
+  category_id         String
+  UserContents        UserContents? @relation(fields: [userContentsUser_id], references: [user_id])
+  userContentsUser_id String?
+}
+
+model Category {
+  id       String     @id @default(uuid())
+  name     String
+  Contents Contents[]
+}
+
+model Dates {
+  id      String   @id @default(uuid())
+  date    DateTime @db.Date
+  count   Int
+  level   Int
+  user    Users    @relation(fields: [user_id], references: [id])
+  user_id String
+}
+
+model UserTrails {
+  user         Users          @relation(fields: [user_id], references: [id])
+  user_id      String
+  trail        Trails         @relation(fields: [trail_id], references: [id])
+  trail_id     String
+  UserContents UserContents[]
+
+  @@id([user_id, trail_id])
+}
+
+model UserContents {
+  user               Users      @relation(fields: [user_id], references: [id])
+  user_id            String     @id
+  contents           Contents[]
+  status             Status     @default(DEFAULT)
+  user_trail         UserTrails @relation(fields: [user_trail_user_id, user_trail_id], references: [user_id, trail_id])
+  user_trail_user_id String
+  user_trail_id      String
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Status {
+  DEFAULT
+  IN_PROGRESS
+  FINISHED
 }
