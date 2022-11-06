@@ -21,7 +21,7 @@ model Users {
 }
 
 model Trails {
-  id          String       @id @default(uuid())
+  id          Int          @id @default(autoincrement())
   name        String
   hours       Int
   description String
@@ -31,7 +31,7 @@ model Trails {
 }
 
 model Contents {
-  id                  String        @id @default(uuid())
+  id                  Int           @id @default(autoincrement())
   title               String
   description         String
   link                String
@@ -39,7 +39,7 @@ model Contents {
   duration            DateTime      @db.Time(0)
   created_at          DateTime      @default(now())
   trail               Trails        @relation(fields: [trail_id], references: [id])
-  trail_id            String
+  trail_id            Int
   category            Category      @relation(fields: [category_id], references: [id])
   category_id         String
   UserContents        UserContents? @relation(fields: [userContentsUser_id], references: [user_id])
@@ -53,7 +53,7 @@ model Category {
 }
 
 model Dates {
-  id      String   @id @default(uuid())
+  id      Int      @id @default(autoincrement())
   date    DateTime @db.Date
   count   Int
   level   Int
@@ -65,7 +65,7 @@ model UserTrails {
   user         Users          @relation(fields: [user_id], references: [id])
   user_id      String
   trail        Trails         @relation(fields: [trail_id], references: [id])
-  trail_id     String
+  trail_id     Int
   UserContents UserContents[]
 
   @@id([user_id, trail_id])
@@ -78,7 +78,7 @@ model UserContents {
   status             Status     @default(DEFAULT)
   user_trail         UserTrails @relation(fields: [user_trail_user_id, user_trail_id], references: [user_id, trail_id])
   user_trail_user_id String
-  user_trail_id      String
+  user_trail_id      Int
 }
 
 enum Role {
