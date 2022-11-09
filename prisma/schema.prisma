@@ -60,7 +60,7 @@ model Category {
 
 model Dates {
   id      Int      @id @default(autoincrement())
-  date    DateTime @db.Date
+  date    DateTime @db.Timestamptz()
   count   Int
   level   Int
   user    Users    @relation(fields: [user_id], references: [id])
