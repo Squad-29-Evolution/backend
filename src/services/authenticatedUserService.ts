@@ -23,10 +23,14 @@ class AuthenticatedUserService {
       throw new Error("Email or password incorrect.");
     }
 
-    const token = await sign({}, "2cbe207a-befb-42f9-8cd7-64a8af8f1994", {
-      subject: userAlreadyExists.id,
-      expiresIn: "30d",
-    });
+    const token = await sign(
+      { user: JSON.stringify(userAlreadyExists) },
+      "2cbe207a-befb-42f9-8cd7-64a8af8f1994",
+      {
+        subject: userAlreadyExists.id,
+        expiresIn: "30d",
+      },
+    );
 
     return { token };
   }
