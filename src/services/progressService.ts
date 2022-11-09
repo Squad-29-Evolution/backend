@@ -74,6 +74,28 @@ class ProgressService {
 
     return dates;
   }
+
+  static async getTopRanking() {
+    const users = await client.users.findMany({
+      where: {
+        NOT: {
+          role: Role.ADMIN,
+        },
+      },
+      orderBy: {
+        xp: "desc",
+      },
+      skip: 0,
+      take: 10,
+      select: {
+        name: true,
+        xp: true,
+        id: true,
+      },
+    });
+
+    return users;
+  }
 }
 
 export default ProgressService;
