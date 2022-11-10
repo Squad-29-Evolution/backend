@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import { AuthenticatedUserService } from "../services/authenticatedUserService";
 import { CreateUserService } from "../services/createUserService";
-import { GetUserService } from "../services/getUserService";
+import { GetUniqueUserService } from "../services/getUniqueUserService";
+import { GetAllUsersService } from "../services/getAllUsersService";
 
 const authenticatedUserService = new AuthenticatedUserService();
 const createUserService = new CreateUserService();
-const getUserService = new GetUserService();
+const getUniqueUserService = new GetUniqueUserService();
+const getAllUsersService = new GetAllUsersService();
 
 class UserController {
   async create(req: Request, res: Response) {
@@ -27,9 +29,15 @@ class UserController {
   async getUserById(req: Request, res: Response) {
     const { id } = req.params;
 
-    const user = await getUserService.execute(id);
+    const user = await getUniqueUserService.execute(id);
 
     return res.json(user);
+  }
+
+  async getAllUsers(req: Request, res: Response) {
+    const users = await getAllUsersService.execute();
+
+    return res.json(users);
   }
 }
 
