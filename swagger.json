@@ -1,0 +1,30 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Orange evolution docs",
+    "description": "documentação detalhada de todas as rotas da api do orange evolution",
+    "vesion": "1.0.0"
+  },
+  "basePath": "/",
+  "paths": {
+    "/users/{id}": {
+      "get": {
+        "description": "Rota que busca o usuario pelo id",
+        "sumary": "Busca de um usuario pelo id",
+        "tags": ["Users"],
+        "parameters": {
+          "in": "path",
+          "name": "id",
+          "type": "string",
+          "required": true
+        },
+
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
