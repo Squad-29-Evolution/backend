@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { root } from "./rootRoute";
-import { userRouter } from "./UserRoute";
+import { userRouter } from "./userRoute";
 import { progressRouter } from "./progressRoute";
 import { contentRouter } from "./contentRoute";
 import { swaggerRoute } from "./swaggerRoute";
