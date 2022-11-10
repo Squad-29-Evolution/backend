@@ -2,14 +2,25 @@ import { Request, Response } from "express";
 import { CreateCategoryService } from "../services/CategoryServices/createCategoryService";
 import { DeleteCategoryService } from "../services/CategoryServices/deleteCategoryService";
 import { GetAllCategoryService } from "../services/CategoryServices/getAllCategoryService";
+import { GetUniqueCategoryService } from "../services/CategoryServices/getUniqueCategoryService";
 import { UpdateCategoryService } from "../services/CategoryServices/updateCategoryService";
 
 const createCategoryService = new CreateCategoryService();
 const updateCategoryService = new UpdateCategoryService();
 const deleteCategoryService = new DeleteCategoryService();
 const getAllCategoryService = new GetAllCategoryService();
+const getUniqueCategoryService = new GetUniqueCategoryService();
 
 class CategoryController {
+  async getUnique(req: Request, res: Response) {
+    const { id } = req.params;
+    const message = await getUniqueCategoryService.execute({
+      id,
+    });
+
+    return res.json(message);
+  }
+
   async getAll(req: Request, res: Response) {
     const message = await getAllCategoryService.execute();
 
