@@ -1,13 +1,6 @@
-import { userInfo } from "os";
 import { client } from "../prisma/client";
 
-interface IRequestGetUser {
-  name: string;
-  email: string;
-  password: string;
-}
-
-class GetUserService {
+class GetUniqueUserService {
   async execute(id: string) {
     const user = await client.users.findFirst({
       where: { id },
@@ -29,4 +22,4 @@ class GetUserService {
   }
 }
 
-export { GetUserService };
+export { GetUniqueUserService };
