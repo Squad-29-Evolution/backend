@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "EditorConfig.EditorConfig"
+    "editorconfig.editorconfig",
+    "prisma.prisma"
   ]
 }
