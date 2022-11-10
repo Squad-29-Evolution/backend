@@ -10,3 +10,4 @@ userRouter.post("/users/login", userController.login);
 userRouter.get("/users/:id", userController.getUserById);
 userRouter.get("/users", userController.getAllUsers);
 userRouter.put("/users/:id", userController.updateUserById);
+userRouter.delete("/users/:id", userController.deleteUserById);

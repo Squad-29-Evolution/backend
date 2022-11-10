@@ -4,12 +4,14 @@ import { CreateUserService } from "../services/createUserService";
 import { GetUniqueUserService } from "../services/getUniqueUserService";
 import { GetAllUsersService } from "../services/getAllUsersService";
 import { UpdateUserService } from "../services/updateUserService";
+import { DeleteUserService } from "../services/deleteUserService";
 
 const authenticatedUserService = new AuthenticatedUserService();
 const createUserService = new CreateUserService();
 const getUniqueUserService = new GetUniqueUserService();
 const getAllUsersService = new GetAllUsersService();
 const updateUserService = new UpdateUserService();
+const deleteUserService = new DeleteUserService();
 
 class UserController {
   async create(req: Request, res: Response) {
@@ -51,6 +53,14 @@ class UserController {
       email,
       password,
     });
+
+    return res.json(user);
+  }
+
+  async deleteUserById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const user = await deleteUserService.execute({ id });
 
     return res.json(user);
   }
