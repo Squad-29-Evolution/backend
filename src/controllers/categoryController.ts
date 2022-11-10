@@ -1,13 +1,21 @@
 import { Request, Response } from "express";
 import { CreateCategoryService } from "../services/CategoryServices/createCategoryService";
 import { DeleteCategoryService } from "../services/CategoryServices/deleteCategoryService";
+import { GetAllCategoryService } from "../services/CategoryServices/getAllCategoryService";
 import { UpdateCategoryService } from "../services/CategoryServices/updateCategoryService";
 
 const createCategoryService = new CreateCategoryService();
 const updateCategoryService = new UpdateCategoryService();
 const deleteCategoryService = new DeleteCategoryService();
+const getAllCategoryService = new GetAllCategoryService();
 
 class CategoryController {
+  async getAll(req: Request, res: Response) {
+    const message = await getAllCategoryService.execute();
+
+    return res.json(message);
+  }
+
   async deleteCategory(req: Request, res: Response) {
     const { id } = req.params;
     const message = await deleteCategoryService.execute({
