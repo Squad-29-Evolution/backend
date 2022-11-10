@@ -8,6 +8,7 @@
     "docker": "docker compose -f docker-compose.dev.yml up -d",
     "dev": "nodemon",
     "build": "tsc",
+    "start": "node dist/app.js",
     "init-dev": "yarn docker && npx prisma migrate dev --name init && yarn dev",
     "prepare": "husky install",
     "pre-commit": "lint-staged",
@@ -17,6 +18,7 @@
     "@prisma/client": "^4.6.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "swagger-ui-express": "^4.6.0"
@@ -32,7 +34,6 @@
     "@types/swagger-ui-express": "^4.1.3",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
-    "dotenv": "^16.0.3",
     "eslint": "^8.26.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
