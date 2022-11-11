@@ -44,14 +44,14 @@ model Contents {
   trail        Trails         @relation(fields: [trail_id], references: [id])
   trail_id     Int
   category     Category       @relation(fields: [category_id], references: [id])
-  category_id  String
+  category_id  Int
   UserContents UserContents[]
 
   @@map("contents")
 }
 
 model Category {
-  id       String     @id @default(uuid())
+  id       Int        @id @default(autoincrement())
   name     String
   Contents Contents[]
 
@@ -81,7 +81,7 @@ model UserTrails {
 }
 
 model UserContents {
-  id                 String     @id
+  id                 Int        @id @default(autoincrement())
   status             Status     @default(DEFAULT)
   user_trail         UserTrails @relation(fields: [user_trail_user_id, user_trail_id], references: [user_id, trail_id])
   user_trail_user_id String

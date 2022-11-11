@@ -14,8 +14,9 @@ const getUniqueCategoryService = new GetUniqueCategoryService();
 class CategoryController {
   async getUnique(req: Request, res: Response) {
     const { id } = req.params;
+    const idToNumber = parseInt(id);
     const message = await getUniqueCategoryService.execute({
-      id,
+      id: idToNumber,
     });
 
     return res.json(message);
@@ -29,8 +30,9 @@ class CategoryController {
 
   async deleteCategory(req: Request, res: Response) {
     const { id } = req.params;
+    const idToNumber = parseInt(id);
     const message = await deleteCategoryService.execute({
-      id,
+      id: idToNumber,
     });
 
     return res.json(message);
@@ -39,8 +41,9 @@ class CategoryController {
   async updateCategory(req: Request, res: Response) {
     const { name } = req.body;
     const { id } = req.params;
+    const idToNumber = parseInt(id);
     const message = await updateCategoryService.execute({
-      id,
+      id: idToNumber,
       name,
     });
 

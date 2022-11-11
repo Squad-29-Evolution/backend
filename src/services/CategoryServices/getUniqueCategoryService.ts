@@ -1,7 +1,7 @@
 import { client } from "../../prisma/client";
 
 interface IRequestgetuniqueService {
-  id: string;
+  id: number;
 }
 
 class GetUniqueCategoryService {
