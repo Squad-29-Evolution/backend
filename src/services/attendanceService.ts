@@ -3,15 +3,6 @@ import { client } from "../prisma/client";
 
 class AttendanceService {
   static async salveTraill(user_id: string, trail_id: number) {
-    const currentXP = await client.users.findFirst({
-      where: {
-        id: user_id,
-      },
-      select: {
-        xp: true,
-      },
-    });
-
     const findUserTrail = await client.userTrails.findMany({
       where: {
         trail_id: trail_id,
@@ -22,8 +13,17 @@ class AttendanceService {
     });
 
     if (findUserTrail.length > 0) {
-      return { message: "this trail aleady exist" };
+      return { message: "this trail already exist" };
     }
+
+    const currentXP = await client.users.findFirst({
+      where: {
+        id: user_id,
+      },
+      select: {
+        xp: true,
+      },
+    });
 
     const userTraill = await client.userTrails.create({
       data: {
@@ -69,6 +69,27 @@ class AttendanceService {
     trail_id: number,
     content_id: number,
   ) {
+    const alreadyExist = await client.userContents.findMany({
+      where: {
+        contentsId: content_id,
+        user_trail_user_id: user_id,
+        user_trail_id: trail_id,
+      },
+    });
+
+    if (alreadyExist.length > 0) {
+      return { message: "this course already salve" };
+    }
+
+    const currentXP = await client.users.findFirst({
+      where: {
+        id: user_id,
+      },
+      select: {
+        xp: true,
+      },
+    });
+
     const salved = await client.userContents.create({
       data: {
         status: Status.FINISHED,
@@ -78,7 +99,50 @@ class AttendanceService {
       },
     });
 
+    if (currentXP?.xp || currentXP?.xp == 0) {
+      const userXP = await client.users.update({
+        data: {
+          xp: currentXP?.xp + 5,
+        },
+        where: {
+          id: user_id,
+        },
+        select: {
+          xp: true,
+        },
+      });
+
+      return { ...salved, ...userXP };
+    }
+
     return salved;
+  }
+
+  static async getAllConcludedCourseInTrail(user_id: string, trail_id: number) {
+    const courses = await client.userContents.findMany({
+      where: {
+        user_trail_user_id: user_id,
+        user_trail_id: trail_id,
+      },
+    });
+
+    return courses;
+  }
+
+  static async getUniqueConcludedCourseInTrail(
+    user_id: string,
+    trail_id: number,
+    content_id: number,
+  ) {
+    const courses = await client.userContents.findMany({
+      where: {
+        contentsId: content_id,
+        user_trail_user_id: user_id,
+        user_trail_id: trail_id,
+      },
+    });
+
+    return courses;
   }
 }
 
