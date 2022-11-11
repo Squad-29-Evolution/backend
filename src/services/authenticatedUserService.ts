@@ -31,8 +31,8 @@ class AuthenticatedUserService {
         expiresIn: "30d",
       },
     );
-
-    return { token };
+    const { id, name, role, xp } = userAlreadyExists;
+    return { id, name, role, xp, token };
   }
 }
 
