@@ -40,6 +40,40 @@ class AttendanceController {
       res.status(500).json({ error: "true", message: error });
     }
   }
+
+  static async getAllConcludedCourseInTrail(req: Request, res: Response) {
+    const { user_id, trail_id } = req.params;
+    const trail_idInt = parseInt(trail_id);
+
+    try {
+      const courses = await AttendanceService.getAllConcludedCourseInTrail(
+        user_id,
+        trail_idInt,
+      );
+
+      return res.json(courses);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
+  }
+
+  static async getUniqueConcludedCourseInTrail(req: Request, res: Response) {
+    const { user_id, trail_id, content_id } = req.params;
+    const content_idInt = parseInt(content_id);
+    const trail_idInt = parseInt(trail_id);
+
+    try {
+      const courses = await AttendanceService.getUniqueConcludedCourseInTrail(
+        user_id,
+        trail_idInt,
+        content_idInt,
+      );
+
+      return res.json(courses);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
+  }
 }
 
 export default AttendanceController;
