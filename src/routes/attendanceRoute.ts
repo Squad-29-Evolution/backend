@@ -9,3 +9,11 @@ attendanceRoute.post(
   "/salveconcludedcourse",
   AttendanceController.salveConcludedCourse,
 );
+attendanceRoute.get(
+  "/getallconcludedcourse/:user_id&:trail_id",
+  AttendanceController.getAllConcludedCourseInTrail,
+);
+attendanceRoute.get(
+  "/getuniqueconcludedcourse/:user_id&:trail_id&:content_id",
+  AttendanceController.getUniqueConcludedCourseInTrail,
+);
