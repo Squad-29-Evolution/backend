@@ -8,7 +8,7 @@ interface IRequestupdateContent {
   type: string;
   duration: Date;
   trail_id: number;
-  category_id: string;
+  category_id: number;
 }
 
 class UpdateContentService {

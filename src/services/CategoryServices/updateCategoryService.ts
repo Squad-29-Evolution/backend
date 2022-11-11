@@ -1,7 +1,7 @@
 import { client } from "../../prisma/client";
 
 interface IRequestupdateCategory {
-  id: string;
+  id: number;
   name: string;
 }
 

@@ -6,6 +6,7 @@ import { contentRouter } from "./contentRoute";
 import { swaggerRoute } from "./swaggerRoute";
 import { studyTrailRouter } from "./studyTrailRoute";
 import { categoryRouter } from "./categoryRoute";
+import { attendanceRoute } from "./attendanceRoute";
 
 export const routes = Router();
 
@@ -16,3 +17,4 @@ routes.use(progressRouter);
 routes.use(swaggerRoute);
 routes.use(studyTrailRouter);
 routes.use(categoryRouter);
+routes.use(attendanceRoute);
