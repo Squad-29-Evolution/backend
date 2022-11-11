@@ -6,6 +6,7 @@ import { contentRouter } from "./contentRoute";
 import { swaggerRoute } from "./swaggerRoute";
 import { studyTrailRouter } from "./studyTrailRoute";
 import { categoryRouter } from "./categoryRoute";
+
 export const routes = Router();
 
 routes.use(root);
