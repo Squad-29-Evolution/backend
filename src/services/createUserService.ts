@@ -1,15 +1,15 @@
 import { hash } from "bcrypt";
 import { client } from "../prisma/client";
+import { randomBytes } from "crypto";
 
 interface IRequestCreateUser {
   name: string;
   email: string;
   password: string;
-  picture: string;
 }
 
 class CreateUserService {
-  async execute({ name, email, password, picture }: IRequestCreateUser) {
+  async execute({ name, email, password }: IRequestCreateUser) {
     const userAlreadyExists = await client.users.findFirst({
       where: { email },
     });
@@ -20,12 +20,15 @@ class CreateUserService {
 
     const passwordHash = await hash(password, 8);
 
+    const randomSeed = randomBytes(6).toString("base64url");
+    const randomPicture = `https://avatars.dicebear.com/api/micah/${randomSeed}.svg`;
+
     const user = await client.users.create({
       data: {
         name,
         email,
         password: passwordHash,
-        picture,
+        picture: randomPicture,
       },
     });
 

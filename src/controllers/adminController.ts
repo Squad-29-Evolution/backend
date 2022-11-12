@@ -5,14 +5,13 @@ const createAdminService = new CreateAdminService();
 
 class AdminController {
   async create(req: Request, res: Response) {
-    const { name, email, password, picture } = req.body;
+    const { name, email, password } = req.body;
 
     try {
       const message = await createAdminService.execute({
         name,
         email,
         password,
-        picture,
       });
 
       return res.json(message);

@@ -9,6 +9,7 @@ class GetAllUsersService {
         name: true,
         email: true,
         role: true,
+        picture: true,
         xp: true,
         created_at: true,
       },
