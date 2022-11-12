@@ -14,41 +14,57 @@ class StudyTrailController {
   async create(req: Request, res: Response) {
     const { name, description, hours } = req.body;
 
-    const studyTrail = await createStudyTrailService.execute({
-      name,
-      description,
-      hours,
-    });
+    try {
+      const studyTrail = await createStudyTrailService.execute({
+        name,
+        description,
+        hours,
+      });
 
-    return res.json(studyTrail);
+      return res.json(studyTrail);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async update(req: Request, res: Response) {
     const { name, description, hours } = req.body;
     const { id } = req.params;
 
-    const studyTrail = await updateStudyTrailService.execute({
-      id,
-      name,
-      description,
-      hours,
-    });
+    try {
+      const studyTrail = await updateStudyTrailService.execute({
+        id,
+        name,
+        description,
+        hours,
+      });
 
-    return res.json(studyTrail);
+      return res.json(studyTrail);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async getAll(req: Request, res: Response) {
-    const studyTrails = await getAllStudyTrailsService.execute();
+    try {
+      const studyTrails = await getAllStudyTrailsService.execute();
 
-    return res.json(studyTrails);
+      return res.json(studyTrails);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async deleteStudyTrailByIdService(req: Request, res: Response) {
     const { id } = req.params;
 
-    const studyTrail = await deleteStudyTrailByIdService.execute({ id });
+    try {
+      const studyTrail = await deleteStudyTrailByIdService.execute({ id });
 
-    return res.json(studyTrail);
+      return res.json(studyTrail);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 }
 

@@ -16,55 +16,78 @@ class ContentController {
     const { description, link, title, type, duration, trail_id, category_id } =
       req.body;
     const { id } = req.params;
-    const message = await updateContentService.execute({
-      id,
-      description,
-      link,
-      title,
-      type,
-      duration,
-      trail_id,
-      category_id,
-    });
 
-    return res.json(message);
+    try {
+      const message = await updateContentService.execute({
+        id,
+        description,
+        link,
+        title,
+        type,
+        duration,
+        trail_id,
+        category_id,
+      });
+
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async deleteContent(req: Request, res: Response) {
     const { id } = req.params;
-    const message = await deleteContentService.execute({ id });
 
-    return res.json(message);
+    try {
+      const message = await deleteContentService.execute({ id });
+
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async getUnique(req: Request, res: Response) {
     const { id } = req.params;
-    const message = await getUniqueContentService.execute({ id });
 
-    return res.json(message);
+    try {
+      const message = await getUniqueContentService.execute({ id });
+
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async getAll(req: Request, res: Response) {
-    const message = await getAllContentService.execute();
+    try {
+      const message = await getAllContentService.execute();
 
-    return res.json(message);
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async create(req: Request, res: Response) {
     const { description, link, title, type, duration, trail_id, category_id } =
       req.body;
 
-    const message = await createContentService.execute({
-      description,
-      link,
-      title,
-      type,
-      duration,
-      trail_id,
-      category_id,
-    });
+    try {
+      const message = await createContentService.execute({
+        description,
+        link,
+        title,
+        type,
+        duration,
+        trail_id,
+        category_id,
+      });
 
-    return res.json(message);
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 }
 

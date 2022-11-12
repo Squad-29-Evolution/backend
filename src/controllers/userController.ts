@@ -17,9 +17,13 @@ class UserController {
   async create(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
-    const user = await createUserService.execute({ name, email, password });
+    try {
+      const user = await createUserService.execute({ name, email, password });
 
-    return res.json(user);
+      return res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async login(req: Request, res: Response) {
@@ -41,36 +45,53 @@ class UserController {
   async getUserById(req: Request, res: Response) {
     const { id } = req.params;
 
-    const user = await getUniqueUserService.execute(id);
+    try {
+      const user = await getUniqueUserService.execute(id);
 
-    return res.json(user);
+      return res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async getAllUsers(req: Request, res: Response) {
-    const users = await getAllUsersService.execute();
+    try {
+      const users = await getAllUsersService.execute();
 
-    return res.json(users);
+      return res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async updateUserById(req: Request, res: Response) {
     const { name, email, password } = req.body;
     const { id } = req.params;
-    const user = await updateUserService.execute({
-      id,
-      name,
-      email,
-      password,
-    });
 
-    return res.json(user);
+    try {
+      const user = await updateUserService.execute({
+        id,
+        name,
+        email,
+        password,
+      });
+
+      return res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async deleteUserById(req: Request, res: Response) {
     const { id } = req.params;
 
-    const user = await deleteUserService.execute({ id });
+    try {
+      const user = await deleteUserService.execute({ id });
 
-    return res.json(user);
+      return res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async checkToken(req: Request, res: Response) {
