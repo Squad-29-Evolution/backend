@@ -12,6 +12,7 @@ model Users {
   name       String
   email      String       @unique
   password   String
+  picture    String
   role       Role         @default(USER)
   xp         Float        @default(0)
   created_at DateTime     @default(now())
