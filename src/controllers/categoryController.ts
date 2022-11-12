@@ -15,49 +15,72 @@ class CategoryController {
   async getUnique(req: Request, res: Response) {
     const { id } = req.params;
     const idToNumber = parseInt(id);
-    const message = await getUniqueCategoryService.execute({
-      id: idToNumber,
-    });
 
-    return res.json(message);
+    try {
+      const message = await getUniqueCategoryService.execute({
+        id: idToNumber,
+      });
+
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async getAll(req: Request, res: Response) {
-    const message = await getAllCategoryService.execute();
+    try {
+      const message = await getAllCategoryService.execute();
 
-    return res.json(message);
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async deleteCategory(req: Request, res: Response) {
     const { id } = req.params;
     const idToNumber = parseInt(id);
-    const message = await deleteCategoryService.execute({
-      id: idToNumber,
-    });
 
-    return res.json(message);
+    try {
+      const message = await deleteCategoryService.execute({
+        id: idToNumber,
+      });
+
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async updateCategory(req: Request, res: Response) {
     const { name } = req.body;
     const { id } = req.params;
     const idToNumber = parseInt(id);
-    const message = await updateCategoryService.execute({
-      id: idToNumber,
-      name,
-    });
 
-    return res.json(message);
+    try {
+      const message = await updateCategoryService.execute({
+        id: idToNumber,
+        name,
+      });
+
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 
   async create(req: Request, res: Response) {
     const { name } = req.body;
 
-    const message = await createCategoryService.execute({
-      name,
-    });
+    try {
+      const message = await createCategoryService.execute({
+        name,
+      });
 
-    return res.json(message);
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 }
 
