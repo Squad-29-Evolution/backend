@@ -41,6 +41,40 @@ class AttendanceController {
     }
   }
 
+  static async getPercentConcludedCourse(req: Request, res: Response) {
+    const { user_id, trail_id, category_id } = req.params;
+    const trail_idInt = parseInt(trail_id);
+    const category_idInt = parseInt(category_id);
+
+    try {
+      const percent = await AttendanceService.getPercentConcludedCourse(
+        user_id,
+        trail_idInt,
+        category_idInt,
+      );
+
+      res.status(203).json(percent);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
+  }
+
+  static async getPercentConcludedTrail(req: Request, res: Response) {
+    const { user_id, trail_id, category_id } = req.params;
+    const trail_idInt = parseInt(trail_id);
+
+    try {
+      const percent = await AttendanceService.getPercentConcludedTrail(
+        user_id,
+        trail_idInt,
+      );
+
+      res.status(203).json(percent);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
+  }
+
   static async getAllConcludedCourseInTrail(req: Request, res: Response) {
     const { user_id, trail_id } = req.params;
     const trail_idInt = parseInt(trail_id);
