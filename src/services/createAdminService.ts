@@ -6,10 +6,11 @@ interface IRequestCreateAdmin {
   name: string;
   email: string;
   password: string;
+  picture: string;
 }
 
 class CreateAdminService {
-  async execute({ name, email, password }: IRequestCreateAdmin) {
+  async execute({ name, email, password, picture }: IRequestCreateAdmin) {
     const adminAlreadyExists = await client.users.findFirst({
       where: { email },
     });
@@ -25,6 +26,7 @@ class CreateAdminService {
         name,
         email,
         password: passwordHash,
+        picture,
         role: Role.ADMIN,
       },
     });
@@ -33,6 +35,7 @@ class CreateAdminService {
       id: admin.id,
       name: admin.name,
       email: admin.email,
+      picture: admin.picture,
       role: admin.role,
     };
   }
