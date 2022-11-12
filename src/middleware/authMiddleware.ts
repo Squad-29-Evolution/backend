@@ -15,7 +15,8 @@ export function authMiddleware(
   const [, token] = authToken.split(" ");
 
   try {
-    verify(token, "2cbe207a-befb-42f9-8cd7-64a8af8f1994");
+    //@ts-ignore
+    verify(token, process.env.SECRET);
     return next();
   } catch (error) {
     return res.status(401).json({ message: "Token invalid" });
