@@ -24,10 +24,18 @@ class UserController {
 
   async login(req: Request, res: Response) {
     const { email, password } = req.body;
+    try {
+      const message = await authenticatedUserService.execute({
+        email,
+        password,
+      });
 
-    const message = await authenticatedUserService.execute({ email, password });
-
-    return res.json(message);
+      return res.json(message);
+    } catch (error) {
+      return res
+        .status(404)
+        .json({ error: true, message: "Email or password incorrect." });
+    }
   }
 
   async getUserById(req: Request, res: Response) {
@@ -63,6 +71,22 @@ class UserController {
     const user = await deleteUserService.execute({ id });
 
     return res.json(user);
+  }
+
+  async checkToken(req: Request, res: Response) {
+    const { token } = req.body;
+
+    if (!token)
+      return res.status(401).json({ message: "Autorização invalida" });
+
+    try {
+      const data = await authenticatedUserService.checkTokenIsValid(token);
+      console.log(data);
+      return res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json({ message: "token invalido" });
+    }
   }
 }
 
