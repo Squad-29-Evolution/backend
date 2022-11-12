@@ -5,7 +5,6 @@ interface IRequestCreateContent {
   description: string;
   link: string;
   type: string;
-  duration: Date;
   trail_id: number;
   category_id: number;
 }
@@ -16,7 +15,6 @@ class CreateContentService {
     link,
     title,
     type,
-    duration,
     trail_id,
     category_id,
   }: IRequestCreateContent) {
@@ -26,7 +24,6 @@ class CreateContentService {
         link,
         title,
         type,
-        duration,
         trail_id,
         category_id,
       },
