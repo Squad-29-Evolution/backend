@@ -12,13 +12,14 @@ const deleteStudyTrailByIdService = new DeleteStudyTrail();
 
 class StudyTrailController {
   async create(req: Request, res: Response) {
-    const { name, description, hours } = req.body;
+    const { name, description, hours, icon } = req.body;
 
     try {
       const studyTrail = await createStudyTrailService.execute({
         name,
         description,
         hours,
+        icon,
       });
 
       return res.json(studyTrail);
@@ -28,7 +29,7 @@ class StudyTrailController {
   }
 
   async update(req: Request, res: Response) {
-    const { name, description, hours } = req.body;
+    const { name, description, hours, icon } = req.body;
     const { id } = req.params;
 
     try {
@@ -37,6 +38,7 @@ class StudyTrailController {
         name,
         description,
         hours,
+        icon,
       });
 
       return res.json(studyTrail);

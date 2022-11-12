@@ -12,7 +12,7 @@ model Users {
   name       String
   email      String       @unique
   password   String
-  picture    String
+  picture    String       @default("")
   role       Role         @default(USER)
   xp         Float        @default(0)
   created_at DateTime     @default(now())
@@ -26,6 +26,7 @@ model Trails {
   id          Int          @id @default(autoincrement())
   name        String
   hours       Int
+  icon        String       @default("")
   description String
   created_at  DateTime     @default(now())
   Contents    Contents[]

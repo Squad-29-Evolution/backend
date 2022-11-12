@@ -5,16 +5,24 @@ interface IRequestUpdateStudyTrailer {
   name: string;
   description: string;
   hours: number;
+  icon: string;
 }
 
 class UpdateStudyTrailService {
-  async execute({ name, description, hours, id }: IRequestUpdateStudyTrailer) {
+  async execute({
+    name,
+    description,
+    hours,
+    id,
+    icon,
+  }: IRequestUpdateStudyTrailer) {
     const studyTrail = await client.trails.update({
       where: { id: Number(id) },
       data: {
         name,
         description,
         hours,
+        icon,
       },
     });
 
