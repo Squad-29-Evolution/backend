@@ -7,6 +7,7 @@ import { swaggerRoute } from "./swaggerRoute";
 import { studyTrailRouter } from "./studyTrailRoute";
 import { categoryRouter } from "./categoryRoute";
 import { attendanceRoute } from "./attendanceRoute";
+import { adminRouter } from "./adminRoute";
 
 export const routes = Router();
 
@@ -18,3 +19,4 @@ routes.use(swaggerRoute);
 routes.use(studyTrailRouter);
 routes.use(categoryRouter);
 routes.use(attendanceRoute);
+routes.use(adminRouter);
