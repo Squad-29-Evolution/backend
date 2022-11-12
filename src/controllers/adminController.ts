@@ -7,9 +7,17 @@ class AdminController {
   async create(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
-    const message = await createAdminService.execute({ name, email, password });
+    try {
+      const message = await createAdminService.execute({
+        name,
+        email,
+        password,
+      });
 
-    return res.json(message);
+      return res.json(message);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
   }
 }
 
