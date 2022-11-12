@@ -5,16 +5,18 @@ interface IRequestUpdateUser {
   name: string;
   password: string;
   email: string;
+  picture: string;
 }
 
 class UpdateUserService {
-  async execute({ id, name, email, password }: IRequestUpdateUser) {
+  async execute({ id, name, email, password, picture }: IRequestUpdateUser) {
     const user = await client.users.update({
       where: { id },
       data: {
         name,
         email,
         password,
+        picture,
       },
     });
 

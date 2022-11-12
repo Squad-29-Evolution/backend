@@ -15,10 +15,15 @@ const deleteUserService = new DeleteUserService();
 
 class UserController {
   async create(req: Request, res: Response) {
-    const { name, email, password } = req.body;
+    const { name, email, password, picture } = req.body;
 
     try {
-      const user = await createUserService.execute({ name, email, password });
+      const user = await createUserService.execute({
+        name,
+        email,
+        password,
+        picture,
+      });
 
       return res.json(user);
     } catch (error) {
@@ -65,7 +70,7 @@ class UserController {
   }
 
   async updateUserById(req: Request, res: Response) {
-    const { name, email, password } = req.body;
+    const { name, email, password, picture } = req.body;
     const { id } = req.params;
 
     try {
@@ -74,6 +79,7 @@ class UserController {
         name,
         email,
         password,
+        picture,
       });
 
       return res.json(user);
