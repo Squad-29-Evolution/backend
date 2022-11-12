@@ -39,7 +39,6 @@ model Contents {
   description  String
   link         String
   type         String
-  duration     DateTime       @db.Time(0)
   created_at   DateTime       @default(now())
   trail        Trails         @relation(fields: [trail_id], references: [id])
   trail_id     Int

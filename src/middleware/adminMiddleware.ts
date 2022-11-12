@@ -1,6 +1,7 @@
 import { verify } from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 import { Role } from "@prisma/client";
+import { client } from "../prisma/client";
 
 interface IJWTData {
   user: string;
@@ -9,7 +10,7 @@ interface IJWTData {
   sub: string;
 }
 
-export function adminMiddleware(
+export async function adminMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,
@@ -23,12 +24,21 @@ export function adminMiddleware(
   const [, token] = authToken.split(" ");
 
   try {
-    const payload = verify(
-      token,
-      "2cbe207a-befb-42f9-8cd7-64a8af8f1994",
-    ) as IJWTData;
+    //@ts-ignore
+    const payload = verify(token, process.env.SECRET) as IJWTData;
 
-    const user = JSON.parse(payload.user);
+    //@ts-ignore
+    const { id } = payload;
+    const user = await client.users.findFirst({
+      where: { id },
+      select: {
+        role: true,
+      },
+    });
+
+    if (!user) {
+      throw new Error("User invalid");
+    }
 
     if (user.role == Role.USER) {
       return res.status(401).json({ message: "Unauthorized" });

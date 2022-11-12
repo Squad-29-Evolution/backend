@@ -28,7 +28,6 @@ class UserController {
 
   async login(req: Request, res: Response) {
     const { email, password } = req.body;
-
     try {
       const message = await authenticatedUserService.execute({
         email,
@@ -37,7 +36,9 @@ class UserController {
 
       return res.json(message);
     } catch (error) {
-      res.status(500).json({ error: "true", message: error });
+      return res
+        .status(404)
+        .json({ error: true, message: "Email or password incorrect." });
     }
   }
 
@@ -90,6 +91,22 @@ class UserController {
       return res.json(user);
     } catch (error) {
       res.status(500).json({ error: "true", message: error });
+    }
+  }
+
+  async checkToken(req: Request, res: Response) {
+    const { token } = req.body;
+
+    if (!token)
+      return res.status(401).json({ message: "Autorização invalida" });
+
+    try {
+      const data = await authenticatedUserService.checkTokenIsValid(token);
+      console.log(data);
+      return res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      return res.status(404).json({ message: "token invalido" });
     }
   }
 }

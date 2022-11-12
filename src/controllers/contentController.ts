@@ -13,8 +13,7 @@ const updateContentService = new UpdateContentService();
 
 class ContentController {
   async updateContent(req: Request, res: Response) {
-    const { description, link, title, type, duration, trail_id, category_id } =
-      req.body;
+    const { description, link, title, type, trail_id, category_id } = req.body;
     const { id } = req.params;
 
     try {
@@ -24,7 +23,6 @@ class ContentController {
         link,
         title,
         type,
-        duration,
         trail_id,
         category_id,
       });
@@ -70,8 +68,7 @@ class ContentController {
   }
 
   async create(req: Request, res: Response) {
-    const { description, link, title, type, duration, trail_id, category_id } =
-      req.body;
+    const { description, link, title, type, trail_id, category_id } = req.body;
 
     try {
       const message = await createContentService.execute({
@@ -79,13 +76,13 @@ class ContentController {
         link,
         title,
         type,
-        duration,
         trail_id,
         category_id,
       });
 
       return res.json(message);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: "true", message: error });
     }
   }

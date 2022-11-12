@@ -1,5 +1,5 @@
 import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { sign, verify, decode } from "jsonwebtoken";
 import { client } from "../prisma/client";
 
 interface IRequestAuthenticated {
@@ -23,16 +23,25 @@ class AuthenticatedUserService {
       throw new Error("Email or password incorrect.");
     }
 
+    const { id, name, role, xp } = userAlreadyExists;
+
     const token = await sign(
-      { user: JSON.stringify(userAlreadyExists) },
-      "2cbe207a-befb-42f9-8cd7-64a8af8f1994",
+      { id },
+      process.env.SECRET || "tokensuperseguroconfia",
       {
         subject: userAlreadyExists.id,
-        expiresIn: "30d",
+        expiresIn: "1d",
       },
     );
-    const { id, name, role, xp } = userAlreadyExists;
+
     return { id, name, role, xp, token };
+  }
+
+  async checkTokenIsValid(token: string) {
+    //@ts-ignore
+    const isValid = await verify(token, process.env.SECRET);
+
+    return isValid;
   }
 }
 

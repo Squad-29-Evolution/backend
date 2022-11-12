@@ -6,7 +6,6 @@ interface IRequestupdateContent {
   description: string;
   link: string;
   type: string;
-  duration: Date;
   trail_id: number;
   category_id: number;
 }
@@ -18,7 +17,6 @@ class UpdateContentService {
     link,
     title,
     type,
-    duration,
     trail_id,
     category_id,
   }: IRequestupdateContent) {
@@ -31,7 +29,6 @@ class UpdateContentService {
         link,
         title,
         type,
-        duration,
         trail_id,
         category_id,
       },
