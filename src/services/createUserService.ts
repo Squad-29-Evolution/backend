@@ -29,7 +29,13 @@ class CreateUserService {
       },
     });
 
-    return user;
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      picture: user.picture,
+      role: user.role,
+    };
   }
 }
 
