@@ -15,14 +15,13 @@ const deleteUserService = new DeleteUserService();
 
 class UserController {
   async create(req: Request, res: Response) {
-    const { name, email, password, picture } = req.body;
+    const { name, email, password } = req.body;
 
     try {
       const user = await createUserService.execute({
         name,
         email,
         password,
-        picture,
       });
 
       return res.json(user);
@@ -108,10 +107,8 @@ class UserController {
 
     try {
       const data = await authenticatedUserService.checkTokenIsValid(token);
-      console.log(data);
       return res.status(200).json(data);
     } catch (error) {
-      console.log(error);
       return res.status(404).json({ message: "token invalido" });
     }
   }

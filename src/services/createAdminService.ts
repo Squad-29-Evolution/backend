@@ -1,16 +1,16 @@
 import { Role } from "@prisma/client";
 import { hash } from "bcrypt";
 import { client } from "../prisma/client";
+import { randomBytes } from "crypto";
 
 interface IRequestCreateAdmin {
   name: string;
   email: string;
   password: string;
-  picture: string;
 }
 
 class CreateAdminService {
-  async execute({ name, email, password, picture }: IRequestCreateAdmin) {
+  async execute({ name, email, password }: IRequestCreateAdmin) {
     const adminAlreadyExists = await client.users.findFirst({
       where: { email },
     });
@@ -21,12 +21,15 @@ class CreateAdminService {
 
     const passwordHash = await hash(password, 8);
 
+    const randomSeed = randomBytes(6).toString("base64url");
+    const randomPicture = `https://avatars.dicebear.com/api/micah/${randomSeed}.svg`;
+
     const admin = await client.users.create({
       data: {
         name,
         email,
         password: passwordHash,
-        picture,
+        picture: randomPicture,
         role: Role.ADMIN,
       },
     });

@@ -82,7 +82,6 @@ class ContentController {
 
       return res.json(message);
     } catch (error) {
-      console.log(error);
       res.status(500).json({ error: "true", message: error });
     }
   }
