@@ -158,6 +158,25 @@ class AttendanceService {
     return percent;
   }
 
+  static async getPercentConcludedTrail(user_id: string, trail_id: number) {
+    const contentsTotal = await client.contents.findMany({
+      where: {
+        trail_id,
+      },
+    });
+
+    const contentsConcluded = await client.userContents.findMany({
+      where: {
+        user_trail_user_id: user_id,
+        user_trail_id: trail_id,
+      },
+    });
+
+    const percent = (contentsConcluded.length * 100) / contentsTotal.length;
+
+    return percent;
+  }
+
   static async getAllConcludedCourseInTrail(user_id: string, trail_id: number) {
     const courses = await client.userContents.findMany({
       where: {
