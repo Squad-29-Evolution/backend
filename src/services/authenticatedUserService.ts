@@ -23,7 +23,7 @@ class AuthenticatedUserService {
       throw new Error("Email or password incorrect.");
     }
 
-    const { id, name, role, xp } = userAlreadyExists;
+    const { id, name, role, xp, picture } = userAlreadyExists;
 
     const token = await sign(
       { id },
@@ -34,7 +34,7 @@ class AuthenticatedUserService {
       },
     );
 
-    return { id, name, role, xp, token };
+    return { id, name, role, xp, picture, token };
   }
 
   async checkTokenIsValid(token: string) {

@@ -44,7 +44,7 @@ class ProgressService {
       },
     });
 
-    if (user?.xp) {
+    if (user?.xp || user?.xp == 0) {
       const userXP = await client.users.update({
         data: {
           xp: user?.xp + 5,
