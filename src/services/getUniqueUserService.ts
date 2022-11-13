@@ -11,6 +11,7 @@ class GetUniqueUserService {
         role: true,
         xp: true,
         created_at: true,
+        picture: true,
       },
     });
 
