@@ -12,6 +12,15 @@ class GetAllUsersService {
         picture: true,
         xp: true,
         created_at: true,
+        Dates: {
+          take: 1,
+          orderBy: {
+            date: "desc",
+          },
+          select: {
+            date: true,
+          },
+        },
       },
     });
 
