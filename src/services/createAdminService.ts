@@ -32,15 +32,25 @@ class CreateAdminService {
         picture: randomPicture,
         role: Role.ADMIN,
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        picture: true,
+        role: true,
+        Dates: {
+          take: 1,
+          orderBy: {
+            date: "desc",
+          },
+          select: {
+            date: true,
+          },
+        },
+      },
     });
 
-    return {
-      id: admin.id,
-      name: admin.name,
-      email: admin.email,
-      picture: admin.picture,
-      role: admin.role,
-    };
+    return admin;
   }
 }
 
