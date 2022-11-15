@@ -51,6 +51,16 @@ class AttendanceService {
     return { ...userTraill, xp: currentXP?.xp };
   }
 
+  static async getSalvedTrails(user_id: string) {
+    const findUserTrail = await client.userTrails.findMany({
+      where: {
+        user_id: user_id,
+      },
+    });
+
+    return findUserTrail;
+  }
+
   static async removeTrail(user_id: string, trail_id: number) {
     const trail = await client.userTrails.delete({
       where: {
