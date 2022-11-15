@@ -17,6 +17,7 @@ studyTrailRouter.put(
   studyTrailController.update,
 );
 studyTrailRouter.get("/trail", studyTrailController.getAll);
+studyTrailRouter.get("/trail/:id", studyTrailController.getUnique);
 studyTrailRouter.delete(
   "/trail/:id",
   adminMiddleware,
