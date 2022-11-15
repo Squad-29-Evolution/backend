@@ -1,27 +1,135 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Orange evolution docs",
-    "description": "documentação detalhada de todas as rotas da api do orange evolution",
-    "vesion": "1.0.0"
+    "title": "Orange evolution",
+    "description": "Documentação detalhada de todas as rotas da api do orange evolution",
+    "version": "1.0.0"
   },
   "basePath": "/",
+  "servers": [
+    {
+      "url": "http://localhost:3000/api-docs",
+      "description": "API de test"
+    },
+    {
+      "url": "https://squad-29-evolution.herokuapp.com/api-docs/",
+      "description": "API de produção"
+    }
+  ],
   "paths": {
-    "/users/{id}": {
-      "get": {
-        "description": "Rota que busca o usuario pelo id",
-        "sumary": "Busca de um usuario pelo id",
-        "tags": ["Users"],
-        "parameters": {
-          "in": "path",
-          "name": "id",
-          "type": "string",
-          "required": true
+    "/category/create": {
+      "post": {
+        "description": "Rota que faz a criação de uma nova categoria.",
+        "sumary": "Criação de uma categoria.",
+        "tags": ["Category"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              },
+              "examples": {
+                "category": {
+                  "value": {
+                    "name": "Fullstack"
+                  }
+                }
+              }
+            }
+          }
         },
-
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "error"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Users": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Trails": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "hours": {
+            "type": "Int"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Contents": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "trail_id": {
+            "type": "Int"
+          },
+          "category_id": {
+            "type": "Int"
+          }
+        }
+      },
+      "UserTrails": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string"
+          },
+          "trail_id": {
+            "type": "Int"
           }
         }
       }
