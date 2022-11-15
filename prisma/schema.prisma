@@ -64,16 +64,16 @@ model Dates {
   date    DateTime @db.Timestamptz()
   count   Int
   level   Int
-  user    Users    @relation(fields: [user_id], references: [id])
+  user    Users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 
   @@map("dates")
 }
 
 model UserTrails {
-  user         Users          @relation(fields: [user_id], references: [id])
+  user         Users          @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id      String
-  trail        Trails         @relation(fields: [trail_id], references: [id])
+  trail        Trails         @relation(fields: [trail_id], references: [id], onDelete: Cascade)
   trail_id     Int
   UserContents UserContents[]
 
@@ -84,10 +84,10 @@ model UserTrails {
 model UserContents {
   id                 Int        @id @default(autoincrement())
   status             Status     @default(DEFAULT)
-  user_trail         UserTrails @relation(fields: [user_trail_user_id, user_trail_id], references: [user_id, trail_id])
+  user_trail         UserTrails @relation(fields: [user_trail_user_id, user_trail_id], references: [user_id, trail_id], onDelete: Cascade)
   user_trail_user_id String
   user_trail_id      Int
-  Contents           Contents?  @relation(fields: [contentsId], references: [id])
+  Contents           Contents?  @relation(fields: [contentsId], references: [id], onDelete: Cascade)
   contentsId         Int?
 
   @@map("userContents")
