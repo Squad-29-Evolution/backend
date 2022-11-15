@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.0",
   "info": {
     "title": "Orange evolution",
     "description": "Documentação detalhada de todas as rotas da api do orange evolution",
@@ -22,6 +22,15 @@
         "description": "Rota que faz a criação de uma nova categoria.",
         "sumary": "Criação de uma categoria.",
         "tags": ["Category"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "description": "nome da nova categoria.",
+            "required": "true"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -57,6 +66,26 @@
           "401": {
             "description": "Unauthorized"
           }
+        }
+      }
+    },
+    "/category/{id}": {
+      "get": {
+        "description": "Rota que faz a busca por uma única categoria.",
+        "sumary": "Busca por uma categoria.",
+        "tags": ["Category"],
+
+        "parameters": [
+          {
+            "id": "id",
+            "in": "params",
+            "description": "id da categoria para busca",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": "ok",
+          "500": "error"
         }
       }
     }
