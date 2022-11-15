@@ -13,6 +13,7 @@ class GetAllContentService {
         trail: {
           select: {
             name: true,
+            icon: true,
           },
         },
       },

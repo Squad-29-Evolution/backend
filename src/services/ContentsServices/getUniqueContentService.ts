@@ -10,6 +10,20 @@ class GetUniqueContentService {
       where: {
         id: Number(id),
       },
+      select: {
+        id: true,
+        description: true,
+        category_id: true,
+        link: true,
+        title: true,
+        type: true,
+        trail_id: true,
+        trail: {
+          select: {
+            icon: true,
+          },
+        },
+      },
     });
 
     return content;
