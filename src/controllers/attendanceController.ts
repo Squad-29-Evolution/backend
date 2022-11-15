@@ -16,6 +16,16 @@ class AttendanceController {
     }
   }
 
+  static async getSalvedTrails(req: Request, res: Response) {
+    const { user_id } = req.params;
+    try {
+      const data = await AttendanceService.getSalvedTrails(user_id);
+      return res.json(data);
+    } catch (error) {
+      res.status(500).json({ error: "true", message: error });
+    }
+  }
+
   static async removeTrail(req: Request, res: Response) {
     const { user_id, trail_id } = req.body;
     try {

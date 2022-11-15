@@ -9,6 +9,13 @@ attendanceRoute.post(
   authMiddleware,
   AttendanceController.salveTraill,
 );
+
+attendanceRoute.get(
+  "/getSalvedTrails/:user_id",
+  authMiddleware,
+  AttendanceController.getSalvedTrails,
+);
+
 attendanceRoute.delete(
   "/deletetrail",
   authMiddleware,
