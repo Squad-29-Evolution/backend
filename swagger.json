@@ -254,6 +254,50 @@
           }
         }
       }
+    },
+    "/contents/": {
+      "put": {
+        "tags": ["Contents"],
+        "description": "Rota que realiza a alteração de um conteudo",
+        "sumary": "Editar um conteudo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_categoria": {
+                    "type": "Int"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "trail_id": {
+                    "type": "Int"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK!"
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
     }
   },
   "components": {
