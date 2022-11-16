@@ -17,30 +17,27 @@
     }
   ],
   "paths": {
-    "/category/create": {
+    "/category/": {
       "post": {
         "description": "Rota que faz a criação de uma nova categoria.",
         "sumary": "Criação de uma categoria.",
         "tags": ["Category"],
         "security": [{ "bearerAuth": [] }],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "body",
-            "description": "nome da nova categoria.",
-            "required": "true"
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Category"
+                "type:": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
               },
               "examples": {
                 "category": {
                   "value": {
-                    "name": "Fullstack"
+                    "name": "Nome da trilha"
                   }
                 }
               }
@@ -71,7 +68,7 @@
     },
     "/category/{id}": {
       "get": {
-        "description": "Rota que faz a busca por uma única categoria.",
+        "description": "Rota que faz a busca por todas as categoria.",
         "sumary": "Busca por uma categoria.",
         "tags": ["Category"],
 
