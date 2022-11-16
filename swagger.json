@@ -17,7 +17,7 @@
     }
   ],
   "paths": {
-    "/category/": {
+    "/category/create": {
       "post": {
         "description": "Rota que faz a criação de uma nova categoria.",
         "sumary": "Criação de uma categoria.",
@@ -120,6 +120,79 @@
           },
           "500": {
             "description": "error"
+          }
+        }
+      }
+    },
+    "/category/put": {
+      "put": {
+        "tags": ["Category"],
+        "description": "Rota que realiza a alteração de uma categoria",
+        "sumary": "Editar uma categoria",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_categoria": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK!"
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/contents/create": {
+      "post": {
+        "sumary": "Criação de um nova conteudo",
+        "description": "Rota que realiza a criação de um novo conteudo",
+        "tags": ["Contents"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "category_id": {
+                    "type": "Int"
+                  },
+                  "trail_id": {
+                    "type": "Int"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK!"
+          },
+          "500": {
+            "description": "error!"
           }
         }
       }
