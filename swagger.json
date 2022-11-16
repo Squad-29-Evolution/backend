@@ -78,7 +78,7 @@
                 "type": "object",
                 "properties": {
                   "id_categoria": {
-                    "type": "string"
+                    "type": "Int"
                   }
                 }
               }
@@ -107,7 +107,7 @@
                 "type": "object",
                 "properties": {
                   "id_categoria": {
-                    "type": "string"
+                    "type": "Int"
                   }
                 }
               }
@@ -136,7 +136,7 @@
                 "type": "object",
                 "properties": {
                   "id_categoria": {
-                    "type": "string"
+                    "type": "Int"
                   }
                 }
               }
@@ -193,6 +193,64 @@
           },
           "500": {
             "description": "error!"
+          }
+        }
+      }
+    },
+    "/contents/delete": {
+      "delete": {
+        "tags": ["Contents"],
+        "description": "Rota que possibilita deletar um conteudo",
+        "sumary": "Deletar um conteudo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_contents": {
+                    "type": "Int"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK!"
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/contents/{id}": {
+      "get": {
+        "description": "Rota que faz a busca por todas os conteudos.",
+        "sumary": "Busca por todos os conteudos.",
+        "tags": ["Contents"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_categoria": {
+                    "type": "Int"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK!"
+          },
+          "500": {
+            "description": "error"
           }
         }
       }
