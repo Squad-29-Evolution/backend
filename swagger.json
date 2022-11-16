@@ -71,18 +71,56 @@
         "description": "Rota que faz a busca por todas as categoria.",
         "sumary": "Busca por uma categoria.",
         "tags": ["Category"],
-
-        "parameters": [
-          {
-            "id": "id",
-            "in": "params",
-            "description": "id da categoria para busca",
-            "required": "true"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_categoria": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
-        ],
+        },
         "responses": {
-          "200": "ok",
-          "500": "error"
+          "200": {
+            "description": "OK!"
+          },
+          "500": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/category/delete": {
+      "delete": {
+        "tags": ["Category"],
+        "description": "Rota que possibilita deletar uma categoria",
+        "sumary": "Deletar uma categoria",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_categoria": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK!"
+          },
+          "500": {
+            "description": "error"
+          }
         }
       }
     }
